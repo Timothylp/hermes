@@ -1,7 +1,6 @@
 import Conversation from "../components/Conversation";
-
-function DevConversation() {
-  return <Conversation/>;
+function Conv() {
+  return <Conversation />;
 }
 
-export default DevConversation;
+export default Conv;
