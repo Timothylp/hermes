@@ -42,7 +42,12 @@ function Sidebar() {
             />
             <div className="flex min-w-0 max-w-full shrink flex-col break-words">
               <p className="text-lg md:text-xl">{contact.name}</p>
-              <p className="overflow-hidden text-ellipsis whitespace-nowrap text-sm text-gray-600 md:text-base">{contact.message}</p>
+              <p
+                className="overflow-hidden text-ellipsis whitespace-nowrap text-sm
+               text-gray-600 md:text-base"
+              >
+                {contact.message}
+              </p>
             </div>
           </div>
         ))}
