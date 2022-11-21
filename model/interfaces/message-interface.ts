@@ -1,6 +1,5 @@
-
 export interface MessageInterface {
-    userId: string;
-    content: string;
-    isMine: boolean;
+  userId: string;
+  content: string;
+  isMine: boolean;
 }

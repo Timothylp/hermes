@@ -7,10 +7,7 @@ type GetResponse = {
   conversation: ConversationContentInterface;
 };
 
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<GetResponse>
-) {
+export default function handler(req: NextApiRequest, res: NextApiResponse<GetResponse>) {
   if (req.method === "GET") {
     let messages: MessageInterface[] = [
       {
@@ -28,8 +25,7 @@ export default function handler(
       { userId: "a", content: "T'es bizarre mec", isMine: true },
       {
         userId: "a",
-        content:
-          "Un petit oiseau se balladait au delà de la montage. Celui-ci avait très froid à cause des vents forts",
+        content: "Un petit oiseau se balladait au delà de la montage. Celui-ci avait très froid à cause des vents forts",
         isMine: true,
       },
     ];

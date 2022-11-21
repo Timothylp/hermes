@@ -18,7 +18,7 @@ function Conversation({
     fetch(`/api/conversation`)
       .then((res) => res.json())
       .then((conv: ConversationContentInterface) => {
-        console.log()
+        console.log();
         setConversationContent(conv);
       });
   }, [selectedConversation]);
