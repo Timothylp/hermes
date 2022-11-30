@@ -48,6 +48,14 @@ function Conversation({
     setSelectedConversation(null);
   };
 
+  if (!selectedConversation) {
+    return (
+      <div className="flex w-full items-center justify-center">
+        <p>Pas de conversation sélectionnée</p>
+      </div>
+    );
+  }
+
   return (
     <div
       id="conversation"
@@ -82,9 +90,12 @@ function Conversation({
           </div>
         ) : null}
       </div>
-      {conversationContent?.messages?.map((message) => (
-        <Message {...message} />
-      ))}
+
+      {conversationContent?.messages ? (
+        conversationContent.messages.map((message) => <Message {...message} />)
+      ) : (
+        <p className="text-center">La conversation n'a pas encore débuté</p>
+      )}
     </div>
   );
 }
