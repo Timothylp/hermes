@@ -30,8 +30,9 @@ function Sidebar({ setSelectedConversation }: { setSelectedConversation: any }) 
         />
       </div>
       <div className="flex flex-col gap-1 md:gap-2">
-        {conversationProfil.map((conversationProfil) => (
+        {conversationProfil.map((conversationProfil, index) => (
           <div
+            key={index}
             className="flex cursor-pointer flex-row items-center space-x-4 rounded-md px-1 py-2 hover:bg-violet-100"
             onClick={() => handleContactClick(conversationProfil)}
           >

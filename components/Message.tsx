@@ -7,7 +7,7 @@ function Message(message: MessageInterface) {
 
   return (
     <div
-      className={`flex h-auto w-full items-end gap-1 px-3 
+      className={`flex h-auto w-full items-end gap-1
         ${message.isMine ? "flex-row-reverse" : ""}`}
     >
       <Image
@@ -18,9 +18,7 @@ function Message(message: MessageInterface) {
         className={`mb-1 h-6 w-6 rounded-full object-cover md:h-16 md:w-16
         ${message.isMine ? "hidden" : ""}`}
       />
-      <p className={`w-auto rounded-md p-2  text-xs font-medium	text-white ${message.isMine ? "bg-indigo-800" : "bg-blue-600"}`}>
-        {message.content}
-      </p>
+      <p className={`w-auto rounded-md p-2  text-xs font-medium	text-white ${message.isMine ? "bg-indigo-800" : "bg-blue-600"}`}>{message.content}</p>
     </div>
   );
 }

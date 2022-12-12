@@ -3,18 +3,10 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { ConversationContentInterface } from "../../model/interfaces/conversation-content-interface copy";
 import { MessageInterface } from "../../model/interfaces/message-interface";
 
-type GetResponse = {
-  conversation: ConversationContentInterface;
-};
-
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<GetResponse>
-) {
+export default function handler(req: NextApiRequest, res: NextApiResponse<ConversationContentInterface>) {
   if (req.method === "GET") {
-    let retrievedConversation: GetResponse = {
-      conversation: getConversation(),
-    };
+    let retrievedConversation: ConversationContentInterface = getConversation();
+
     res.status(200).json(retrievedConversation);
   }
 }
@@ -36,8 +28,7 @@ function getConversation(): ConversationContentInterface {
     { userId: "a", content: "T'es bizarre mec", isMine: true },
     {
       userId: "a",
-      content:
-        "Un petit oiseau se balladait au delà de la montage. Celui-ci avait très froid à cause des vents forts",
+      content: "Un petit oiseau se balladait au delà de la montage. Celui-ci avait très froid à cause des vents forts",
       isMine: true,
     },
   ];
