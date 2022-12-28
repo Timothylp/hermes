@@ -8,10 +8,11 @@ function MessageInput() {
       <input
         type="text"
         value={message}
+        placeholder="Votre message..."
         onChange={(e) => setMessage(e.target.value)}
-        className="flex-1 rounded-md border-2 border-gray-200 p-2 focus:border-blue-500 focus:outline-none"
+        className="flex-1 rounded-md border border-gray-300 p-2 focus:border-violet-500 focus:outline-none"
       />
-      <button onClick={() => {}} className="rounded-md bg-blue-500 p-2 text-white">
+      <button onClick={() => {}} className="rounded-md bg-indigo-800 hover:bg-indigo-600 p-2 text-white">
         Envoyer
       </button>
     </div>
