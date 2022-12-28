@@ -34,7 +34,7 @@ function Conversation({ selectedConversation, setSelectedConversation }: { selec
       id="conversation"
       className={`absolute ${
         selectedConversation ? "left-0" : "left-full"
-      } flex h-full min-h-[92vh]: w-full flex-col bg-white transition-[left] duration-300 md:relative md:left-0 md:w-3/4`}
+      } flex h-[92vh] w-full flex-col bg-white transition-[left] duration-300 md:relative md:left-0 md:w-3/4`}
     >
       <div className="border-b-1 flex items-center gap-2 p-2 shadow-lg md:border-b md:shadow-none">
         <svg onClick={() => handleCloseConversation()} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5 md:hidden">

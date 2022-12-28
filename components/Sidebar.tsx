@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { ConversationProfilInterface } from "../model/interfaces/conversation-profil-interface";
+import Input from "./Input";
 
 function Sidebar({ setSelectedConversation }: { setSelectedConversation: any }) {
   const tempUrl =

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "./Button";
 
 function MessageInput() {
   const [message, setMessage] = useState<string>("");
@@ -12,9 +13,7 @@ function MessageInput() {
         onChange={(e) => setMessage(e.target.value)}
         className="flex-1 rounded-md border border-gray-300 p-2 focus:border-violet-500 focus:outline-none"
       />
-      <button onClick={() => {}} className="rounded-md bg-indigo-800 hover:bg-indigo-600 p-2 text-white">
-        Envoyer
-      </button>
+      <Button>Envoyer</Button>
     </div>
   );
 }

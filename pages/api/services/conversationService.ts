@@ -1,4 +1,4 @@
-import { ConversationContentInterface } from "../../../model/interfaces/conversation-content-interface copy";
+import { ConversationContentInterface } from "../../../model/interfaces/conversation-content-interface";
 import { MessageInterface } from "../../../model/interfaces/message-interface";
 
 export default class ConversationService {
