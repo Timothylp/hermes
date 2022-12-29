@@ -1,6 +1,6 @@
-import NextAuth from "next-auth";
+import NextAuth, { Session, TokenSet, User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { redirect } from "next/dist/server/api-utils";
+import prisma from "../../../server/db/client";
 
 export const authOptions = {
   providers: [
@@ -8,17 +8,28 @@ export const authOptions = {
       name: "Credentials",
 
       credentials: {
-        username: { label: "Username", type: "text" },
-        password: { label: "Password", type: "password" },
+        email: { label: "Adresse email", type: "text" },
+        password: { label: "Mot de passe", type: "password" },
       },
 
-      async authorize(credentials, req) {
-        const user = { id: "1", name: "J Smith", email: "jsmith@example.com" };
-        if (user) {
-          return user;
-        } else {
+      authorize: async (credentials, req) => {
+        const user = await prisma.user.findFirst({
+          where: {
+            email: credentials?.email,
+          },
+        });
+
+        if (!user) {
           return null;
         }
+
+        const isValid = credentials?.password === user.password;
+
+        if (!isValid) {
+          return null;
+        }
+
+        return user;
       },
     }),
   ],
@@ -27,10 +38,5 @@ export const authOptions = {
     signIn: "/auth/signIn",
   },
 
-  callbacks: {
-    async redirect({ url, baseUrl }) {
-      return url.startsWith(baseUrl) ? url : baseUrl;
-    },
-  },
 };
 export default NextAuth(authOptions);

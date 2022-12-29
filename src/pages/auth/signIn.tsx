@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 const SignIn = () => {
   const router = useRouter();
   const { data: session, status } = useSession();
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -17,7 +17,7 @@ const SignIn = () => {
     setError("");
     setLoading(true);
     try {
-      await signIn("credentials", { callbackUrl: "/", username: username, password: password });
+      await signIn("credentials", { email: email, password: password });
     } catch (error) {
       setError(error.message);
       setLoading(false);
@@ -34,9 +34,9 @@ const SignIn = () => {
         {error && <p className="text-red-500">{error}</p>}
         <div className="mb-4">
           <label className="mb-2 block text-sm font-bold text-gray-700" htmlFor="username">
-            Nom d'utilisateur
+            Adresse email
           </label>
-          <Input id="username" placeholder="Nom d'utilisateur" value={username} setValue={setUsername} required />
+          <Input id="email" placeholder="Adresse email" value={email} setValue={setEmail} required />
         </div>
         <div className="mb-6">
           <label className="mb-2 block text-sm font-bold text-gray-700" htmlFor="password">
