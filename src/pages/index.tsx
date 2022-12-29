@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useSession, getSession, signIn } from "next-auth/react";
 
-import Conversation from "../components/Conversation";
-import Sidebar from "../components/Sidebar";
+import Conversation from "../components/conversation/Conversation";
+import Sidebar from "../components/layouts/Sidebar";
 import { ConversationProfilInterface } from "../model/interfaces/conversation-profil-interface";
 
 function Home() {

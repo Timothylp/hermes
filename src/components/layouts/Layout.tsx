@@ -3,7 +3,7 @@ import localFont from "@next/font/local";
 
 import { signOut, useSession } from "next-auth/react";
 
-const font = localFont({ src: "../styles/fonts/Stanley.otf", variable: "--font-stanley" });
+const font = localFont({ src: "../../styles/fonts/Stanley.otf", variable: "--font-stanley" });
 
 function Layout({ children }: { children: React.ReactNode }) {
   const { data: session, status } = useSession();

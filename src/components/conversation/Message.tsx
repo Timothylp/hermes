@@ -1,4 +1,4 @@
-import { MessageInterface } from "../model/interfaces/message-interface";
+import { MessageInterface } from "../../model/interfaces/message-interface";
 import Image from "next/image";
 
 function Message(message: MessageInterface) {

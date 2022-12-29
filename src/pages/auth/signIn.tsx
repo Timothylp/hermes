@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { signIn, useSession } from "next-auth/react";
-import Button from "../../components/Button";
-import Input from "../../components/Input";
+import Button from "../../components/ui/Button";
+import Input from "../../components/ui/Input";
 import { useRouter } from "next/router";
 
 const SignIn = () => {
