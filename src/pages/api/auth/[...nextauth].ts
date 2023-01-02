@@ -1,4 +1,4 @@
-import NextAuth, { Session, TokenSet, User } from "next-auth";
+import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import prisma from "../../../server/db/client";
 
@@ -12,24 +12,22 @@ export const authOptions = {
         password: { label: "Mot de passe", type: "password" },
       },
 
-      authorize: async (credentials, req) => {
+      authorize: async (credentials) => {
         const user = await prisma.user.findFirst({
           where: {
             email: credentials?.email,
           },
         });
 
-        if (!user) {
-          return null;
+        if (user) {
+          const isValid = credentials?.password === user.password;
+
+          if (isValid) {
+            return user;
+          }
         }
 
-        const isValid = credentials?.password === user.password;
-
-        if (!isValid) {
-          return null;
-        }
-
-        return user;
+        return null;
       },
     }),
   ],
@@ -37,6 +35,5 @@ export const authOptions = {
   pages: {
     signIn: "/auth/signIn",
   },
-
 };
 export default NextAuth(authOptions);

@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import { MessageInterface } from "../../model/interfaces/message-interface";
 import Message from "./Message";
 import Image from "next/image";
-import { ConversationContentInterface } from "../model/interfaces/conversation-content-interface copy";
+import { ConversationContentInterface } from "../model/interfaces/conversation-content-interface";
 import { ConversationProfilInterface } from "../../model/interfaces/conversation-profil-interface";
 import MessageInput from "./MessageInput";
 
-function Conversation({ selectedConversation, setSelectedConversation }: { selectedConversation: ConversationProfilInterface; setSelectedConversation: any }) {
+function ConversationThread({ selectedConversation, setSelectedConversation }: { selectedConversation: ConversationProfilInterface; setSelectedConversation: any }) {
   const [conversationContent, setConversationContent] = useState<ConversationContentInterface>();
 
   useEffect(() => {
@@ -65,4 +65,4 @@ function Conversation({ selectedConversation, setSelectedConversation }: { selec
   );
 }
 
-export default Conversation;
+export default ConversationThread;

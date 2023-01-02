@@ -8,6 +8,8 @@ const font = localFont({ src: "../../styles/fonts/Stanley.otf", variable: "--fon
 function Layout({ children }: { children: React.ReactNode }) {
   const { data: session, status } = useSession();
 
+  console.log("session", session)
+
   return (
     <>
       <Header />

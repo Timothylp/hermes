@@ -1,7 +1,6 @@
-import { useState } from "react";
-import Image from "next/image";
+import { useState, useEffect } from "react";
 import { ConversationProfilInterface } from "../../model/interfaces/conversation-profil-interface";
-import Input from "./Input";
+import ConversationExcerpt from "../conversation/ConversationExcerpt";
 
 function Sidebar({ setSelectedConversation }: { setSelectedConversation: any }) {
   const tempUrl =
@@ -32,28 +31,7 @@ function Sidebar({ setSelectedConversation }: { setSelectedConversation: any }) 
       </div>
       <div className="flex flex-col gap-1 md:gap-2">
         {conversationProfil.map((conversationProfil, index) => (
-          <div
-            key={index}
-            className="flex cursor-pointer flex-row items-center space-x-4 rounded-md px-1 py-2 hover:bg-violet-100"
-            onClick={() => handleContactClick(conversationProfil)}
-          >
-            <Image
-              src={conversationProfil.profile}
-              alt="profile"
-              width={256}
-              height={171}
-              className="h-12 w-12 rounded-full object-cover md:h-16 md:w-16"
-            />
-            <div className="flex min-w-0 max-w-full shrink flex-col break-words">
-              <p className="text-lg md:text-xl">{conversationProfil.name}</p>
-              <p
-                className="overflow-hidden text-ellipsis whitespace-nowrap text-sm
-               text-gray-600 md:text-base"
-              >
-                {conversationProfil.message}
-              </p>
-            </div>
-          </div>
+          <ConversationExcerpt key={index} conversation={conversationProfil} onClickConversation={handleContactClick} />
         ))}
       </div>
     </div>

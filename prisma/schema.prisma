@@ -33,7 +33,5 @@ model Message {
 model Conversation {
   id      String      @id @default(cuid())
   messages Message[]
-  userId  String
-  
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  users   User[]
 }
