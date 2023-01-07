@@ -1,18 +1,30 @@
 import { useState, useEffect } from "react";
-import { MessageInterface } from "../../model/interfaces/message-interface";
 import Message from "./Message";
 import Image from "next/image";
-import { ConversationContentInterface } from "../model/interfaces/conversation-content-interface";
-import { ConversationProfilInterface } from "../../model/interfaces/conversation-profil-interface";
+import { ConversationWithAll } from "../../model/types/prisma-custom-types";
 import MessageInput from "./MessageInput";
+import { useSession } from "next-auth/react";
 
-function ConversationThread({ selectedConversation, setSelectedConversation }: { selectedConversation: ConversationProfilInterface; setSelectedConversation: any }) {
-  const [conversationContent, setConversationContent] = useState<ConversationContentInterface>();
+
+function ConversationThread({ selectedConversation, setSelectedConversation }: { selectedConversation: ConversationWithAll; setSelectedConversation: any }) {
+  
+  const { data: session, status } = useSession();
+  const [conversationContent, setConversationContent] = useState<ConversationWithAll>();
 
   useEffect(() => {
-    fetch(`/api/conversation`)
+
+    if (!selectedConversation) return;
+    
+    fetch(`/api/conversations`, {
+      method: "POST",
+      body: JSON.stringify({
+        userId: session?.token?.sub,
+        conversationId: selectedConversation.id,
+      }),
+    })
       .then((res) => res.json())
-      .then((conversation: ConversationContentInterface) => {
+      .then((conversation: ConversationWithAll) => {
+        console.log(conversation)
         setConversationContent(conversation);
       });
   }, [selectedConversation]);
@@ -46,8 +58,9 @@ function ConversationThread({ selectedConversation, setSelectedConversation }: {
         </svg>
         {selectedConversation ? (
           <div className="flex items-center gap-2">
-            <Image src={selectedConversation.profile} alt="profile" width={256} height={171} className="h-7 w-7 rounded-full object-cover md:h-16 md:w-16" />
-            <p className="text-lg">{selectedConversation.name}</p>
+            <Image src="https://scontent-cdt1-1.xx.fbcdn.net/v/t1.6435-9/139243499_3945354685495166_9112770101454389337_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=c2WdHWVKR8gAX9YF85H&_nc_ht=scontent-cdt1-1.xx&oh=00_AfDe0dzQ2UYzQs61Vr0D4sXmpb6NfPLAblWvGdGyV8f2VQ&oe=63D38A70"
+              alt="profile" width={256} height={171} className="h-7 w-7 rounded-full object-cover md:h-16 md:w-16" />
+            <p className="text-lg">{selectedConversation?.users?.filter((user) => user.id !== session?.token?.sub).map((user) => user.username).join(", ")}</p>
           </div>
         ) : null}
       </div>

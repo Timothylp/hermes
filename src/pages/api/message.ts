@@ -3,10 +3,6 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { ConversationContentInterface } from "../../model/interfaces/conversation-content-interface";
 import { MessageInterface } from "../../model/interfaces/message-interface";
 
-export default function handler(req: NextApiRequest, res: NextApiResponse<MessageInterface | boolean>) {
-  if (req.method === "POST") {
-  }
-}
 
 function postMessage(message: MessageInterface): boolean {
   //use of socket system TO DO

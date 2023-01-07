@@ -1,21 +1,32 @@
 import { useState, useEffect } from "react";
 import { ConversationProfilInterface } from "../../model/interfaces/conversation-profil-interface";
 import ConversationExcerpt from "../conversation/ConversationExcerpt";
+import { ConversationWithAll } from "../../model/types/prisma-custom-types";
+import { useSession } from "next-auth/react";
 
 function Sidebar({ setSelectedConversation }: { setSelectedConversation: any }) {
-  const tempUrl =
-    "https://scontent-cdt1-1.xx.fbcdn.net/v/t1.6435-9/139243499_3945354685495166_9112770101454389337_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=c2WdHWVKR8gAX9YF85H&_nc_ht=scontent-cdt1-1.xx&oh=00_AfDe0dzQ2UYzQs61Vr0D4sXmpb6NfPLAblWvGdGyV8f2VQ&oe=63D38A70";
+  const { data: session } = useSession();
+  const [conversationProfil, setConversationProfil] = useState(Array<ConversationWithAll>);
 
-  const tempMesage =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in nulla vehicula, semper justo venenatis, euismod neque. Integer nec mi tincidunt, luctus quam ac, efficitur ex. Praesent at lobortis neque, eu ultrices nunc. Nam tempus tristique erat quis rhoncus. Nunc scelerisque mauris nec eros eleifend, et ultricies ante tincidunt. Curabitur venenatis nulla id blandit vestibulum. Sed pretium volutpat sem, id viverra turpis pulvinar vitae. Aliquam ut augue magna. Cras est ante, faucibus eget tortor quis, dignissim maximus magna. Praesent leo tellus, lacinia venenatis neque sed, lacinia ultricies nulla. Pellentesque dapibus fermentum purus rutrum porttitor.";
+  useEffect(() => {
+    fetch(`/api/conversations/`, {
+      method: "POST",
+      body: JSON.stringify({
+        userId: session?.token?.sub
+      })
+    })
+      .then((res) => res.json())
+      .then((conversations: Array<ConversationWithAll>) => {
+        console.log(conversations);
+        setConversationProfil(conversations);
+      });
+  }, []);
 
-  const [conversationProfil, setConversationProfil] = useState<ConversationProfilInterface[]>([
-    { id: "a", profile: tempUrl, name: "John", message: tempMesage },
-    { id: "b", profile: tempUrl, name: "Jane", message: tempMesage },
-    { id: "c", profile: tempUrl, name: "Jack", message: tempMesage },
-  ]);
+  const handleCloseConversation = () => {
+    setSelectedConversation(null);
+  };
 
-  const handleContactClick = (conversationProfil: ConversationProfilInterface) => {
+  const handleContactClick = (conversationProfil: ConversationWithAll) => {
     setSelectedConversation(conversationProfil);
   };
 

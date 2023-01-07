@@ -1,13 +1,19 @@
-import { useState } from "react";
-import { useSession, getSession, signIn } from "next-auth/react";
+import { useEffect, useState } from "react";
+import { useSession, signIn } from "next-auth/react";
 
 import ConversationThread from "../components/conversation/ConversationThread";
 import Sidebar from "../components/layouts/Sidebar";
-import { ConversationProfilInterface } from "../model/interfaces/conversation-profil-interface";
+import { ConversationWithAll } from "../model/types/prisma-custom-types";
+
+import { socketInitializer } from "../services/socketService";
 
 function Home() {
   const [selectedConversation, setSelectedConversation] = useState(null);
   const { data: session, status } = useSession();
+
+  useEffect(() => {
+    if (status === "authenticated") socketInitializer();
+  }, []);
 
   if (status === "unauthenticated") {
     signIn();
@@ -17,7 +23,10 @@ function Home() {
     return (
       <>
         <Sidebar setSelectedConversation={setSelectedConversation} />
-        <ConversationThread setSelectedConversation={setSelectedConversation} selectedConversation={selectedConversation as unknown as ConversationProfilInterface} />
+        <ConversationThread
+          setSelectedConversation={setSelectedConversation}
+          selectedConversation={selectedConversation as unknown as ConversationWithAll}
+        />
       </>
     );
   }
