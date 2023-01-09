@@ -4,6 +4,7 @@ import Image from "next/image";
 import { ConversationWithAll } from "../../model/types/prisma-custom-types";
 import MessageInput from "./MessageInput";
 import { useSession } from "next-auth/react";
+import { joinConversation } from "../../services/socketService";
 
 
 function ConversationThread({ selectedConversation, setSelectedConversation }: { selectedConversation: ConversationWithAll; setSelectedConversation: any }) {
@@ -26,6 +27,8 @@ function ConversationThread({ selectedConversation, setSelectedConversation }: {
       .then((conversation: ConversationWithAll) => {
         console.log(conversation)
         setConversationContent(conversation);
+        //need to secure it later with token check
+        joinConversation(conversation.id);
       });
   }, [selectedConversation]);
 

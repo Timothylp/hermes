@@ -1,13 +1,14 @@
 import { FormEvent, useState } from "react";
 import Button from "../ui/Button";
-import { sendSocketMessage } from "../../services/socketService";
+import { sendMessage } from "../../services/socketService";
 
 function MessageInput() {
   const [message, setMessage] = useState<string>("");
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    sendSocketMessage(message)
+    //need to be able to send the conversation id
+    sendMessage(message);
     setMessage("");
   };
 
