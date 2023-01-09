@@ -18,7 +18,11 @@ export const socketInitializer = async () => {
 //     });
 // }
 
-export const sendSocketMessage = (message: string) => {
+export const joinConversation = (idConversation: string) => {
+  socket?.emit("join conversation", idConversation);
+};
+
+export const sendMessage = (message: string) => {
   console.log("appel service socket");
   socket?.emit("message", message);
 };
